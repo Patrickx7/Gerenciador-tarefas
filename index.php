@@ -9,45 +9,40 @@
 
 <body>
 
-    <h1>Seja Bem-vindo!</h1>
-
-
-    <form method="POST" action="index.php">
-        <input type="text" name="titulo" placeholder="Digite uma tarefa">
-        <button type="submit">Adicionar</button>
-    </form>
-
+    <h1>Gerenciador de Tarefas</h1>
 
     <?php
 
-    $nome = "Patrick";                             // variáveis começam com $
-    $tarefas = []; //array 
+    $nome = "Patrick";
+    $linguagem = "JavaScript";
+    $tarefas = ["Lubrificar corrente", "Cortar cabelo", "Estudar PHP", "Terminar projeto"];
 
-    echo "<p>Olá, " . $nome . "!</p>"; //Echo imprime; o ponto  (.) concatena strings
+    echo "<p>Meu nome é $nome! e eu amo $linguagem.</p>";
+
     ?>
-
 
     <h2>Minhas tarefas</h2>
 
     <ul>
         <?php
 
-        // verifica se veio um formulário
-        if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
-            // pega o que o usuário digitou
-            $novaTarefa = $_POST["titulo"];
-
-            // adiciona na lista
-            $tarefas[] = $novaTarefa;
-        }
-
         foreach ($tarefas as $tarefa) {
-            echo "<li>" . $tarefa . "</li>";
+            echo "<li>$tarefa</li>";
         }
 
         ?>
+        
     </ul>
+        
+        <?php
+
+        $total = count($tarefas);           // pergunta e guarda a resposta na caixinha
+                 
+        echo "<p>Você tem $total tarefas no total.</p>";   // usa a caixinha na frase
+        
+        ?>
+
+    
 
 </body>
 
