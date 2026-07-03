@@ -21,6 +21,11 @@
 
     ?>
 
+    <form method="POST" action="index.php">
+        <input type="text" name="titulo" placeholder="Digite uma tarefa">
+        <button type="submit">Adicionar</button>
+    </form>
+
     <h2>Minhas tarefas</h2>
 
     <ul>
