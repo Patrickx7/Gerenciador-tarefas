@@ -17,6 +17,10 @@
     $linguagem = "JavaScript";
     $tarefas = ["Lubrificar corrente", "Cortar cabelo", "Estudar PHP", "Terminar projeto"];
 
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        $tarefas[] = $_POST["titulo"];
+    }
+
     echo "<p>Meu nome é $nome! e eu amo $linguagem.</p>";
 
     ?>
