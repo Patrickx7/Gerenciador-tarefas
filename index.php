@@ -1,75 +1,75 @@
+<?php
+
+$nome = "Patrick";
+$linguagem = "JavaScript";
+
+// ABRIR O CADERNO: se ele existe, leio; senão, começo com a caixa vazia
+if (file_exists("tarefas.json")) {
+    $texto = file_get_contents("tarefas.json");
+    $tarefas = json_decode($texto, true);
+} else {
+    $tarefas = [];   // primeira vez na vida: caixa vazia
+}
+
+// Se veio algo do formulário, adicionar e SALVAR
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $tarefas[] = $_POST["titulo"];
+    $texto = json_encode($tarefas);
+    file_put_contents("tarefas.json", $texto);
+    header("Location: index.php");
+    exit;
+}
+
+
+
+
+?>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Tarefas</title>
+</head>
+
+<body>
+
+    <h1>Gerenciador de Tarefas</h1>
+
+    <?php
+    echo "<p>Meu nome é $nome! e eu amo $linguagem.</p>";
+    ?>
+
+    <form method="POST" action="index.php">
+        <input type="text" name="titulo" placeholder="Digite uma tarefa">
+        <button type="submit">Adicionar</button>
+    </form>
+
+    <h2>Minhas tarefas</h2>
+
+    <ul>
+        <?php
+
+        foreach ($tarefas as $tarefa) {
+            echo "<li>$tarefa</li>";
+        }
+
+        ?>
+
+    </ul>
+
     <?php
 
-    $nome = "Patrick";
-    $linguagem = "JavaScript";
+    $total = count($tarefas);           // pergunta e guarda a resposta na caixinha
 
-    // ABRIR O CADERNO: se ele existe, leio; senão, começo com a caixa vazia
-    if (file_exists("tarefas.json")) {
-        $texto = file_get_contents("tarefas.json");
-        $tarefas = json_decode($texto, true);
-    } else {
-        $tarefas = [];   // primeira vez na vida: caixa vazia
-    }
-
-    // Se veio algo do formulário, adicionar e SALVAR
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        $tarefas[] = $_POST["titulo"];
-        $texto = json_encode($tarefas);
-        file_put_contents("tarefas.json", $texto);
-        header("Location: index.php");
-        exit;
-    }
-
-
-    
+    echo "<p>Você tem $total tarefas no total.</p>";   // usa a caixinha na frase
 
     ?>
 
-    <!DOCTYPE html>
-    <html lang="pt-BR">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Gerenciador de Tarefas</title>
-    </head>
-
-    <body>
-
-        <h1>Gerenciador de Tarefas</h1>
-
-        <?php
-        echo "<p>Meu nome é $nome! e eu amo $linguagem.</p>";
-        ?>
-
-        <form method="POST" action="index.php">
-            <input type="text" name="titulo" placeholder="Digite uma tarefa">
-            <button type="submit">Adicionar</button>
-        </form>
-
-        <h2>Minhas tarefas</h2>
-
-        <ul>
-            <?php
-
-            foreach ($tarefas as $tarefa) {
-                echo "<li>$tarefa</li>";
-            }
-
-            ?>
-
-        </ul>
-
-        <?php
-
-        $total = count($tarefas);           // pergunta e guarda a resposta na caixinha
-
-        echo "<p>Você tem $total tarefas no total.</p>";   // usa a caixinha na frase
-
-        ?>
 
 
+</body>
 
-    </body>
-
-    </html>
+</html>
