@@ -16,10 +16,19 @@
     $nome = "Patrick";
     $linguagem = "JavaScript";
     $tarefas = ["Lubrificar corrente", "Cortar cabelo", "Estudar PHP", "Terminar projeto"];
+    $texto = json_encode($tarefas);
+    $tarefas = json_decode($texto, true);
 
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        $tarefas[] = $_POST["titulo"];
-    }
+    // 1. SALVAR: escreve um texto dentro de um arquivo
+    //    (se o arquivo não existe, o PHP cria sozinho)
+    file_put_contents("tarefas.json", $texto);
+
+    // 2. LER: pega o texto que está dentro do arquivo
+    $texto = file_get_contents("tarefas.json");
+
+    // 3. PERGUNTAR: esse arquivo existe? (responde sim ou não)
+    file_exists("tarefas.json");
+
 
     echo "<p>Meu nome é $nome! e eu amo $linguagem.</p>";
 
